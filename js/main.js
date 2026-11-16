@@ -48,20 +48,18 @@ function createStudent(name, className) {
     return {
         name: name,
         className: className,
-
-        greet: function () {
+        intro() {
             return "I am " + this.name + " from " + this.className;
-        }
+        },
     };
 }
+const s1 = createStudent("Ada", "SS1");
+const s2 = createStudent("Bayo", "SS2");
+const s3 = createStudent("Chidi", "SS3");
+console.log(s1.intro());
+console.log(s2.intro());
+console.log(s3.intro());
 
-const student1 = createStudent("Ada", "SS1");
-const student2 = createStudent("Bayo", "SS2");
-const student3 = createStudent("Chidi", "SS3");
-
-console.log(student1.greet());
-console.log(student2.greet());
-console.log(student3.greet());
 
 
 // 5
@@ -81,10 +79,10 @@ function createProduct(name, price) {
     };
 }
 
-const sneakers = createProduct("Sneakers", 25000);
+const _sneakers = createProduct("_Sneakers", 25000);
 const Bag = createProduct("Bag", 18000);
 
-console.log("Sneakers 10% off:", sneakers.discount(10));
+console.log("_Sneakers 10% off:", _sneakers.discount(10));
 
 console.log("Bag 20% off:", Bag.discount(20));
 
@@ -92,19 +90,15 @@ console.log("Bag 20% off:", Bag.discount(20));
 // 6
 
 function Book(title, author, pages) {
-    this.title = "Learn JavaScript";
-    this.author = "by Ada Obi";
-    this.pages = 250;
-
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
     this.describe = function () {
         return this.title + " by " + this.author + " (" + this.pages + " pages)";
     };
 }
-
-const book1 = new Book("Things Fall Apart", "Chinua Achebe", 200);
-
-const book2 = new Book("Half of a Yellow Sun", "Chimamanda", 300);
-
+const book1 = new Book("Learn JavaScript", "Ada Obi", 250);
+const book2 = new Book("Mastering CSS", "Bayo Ade", 180);
 console.log(book1.describe());
 console.log(book2.describe());
 
@@ -112,14 +106,14 @@ console.log(book2.describe());
 // 7
 
 const user = {
-    name: "John"
+    name: "Chidi"
 };
 
 // Adding a new property
-user.email = "john@gmail.com";
+user.email = "stanleynnanna33@gmail.com";
 
 // Changing the name
-user.name = "Ola";
+user.name = "Stan";
 
 console.log(user);
 
@@ -135,12 +129,10 @@ const phone = {
     brand: "Tecno"
 };
 
-// Changing the property
 phone.brand = "Samsung";
 
 console.log(phone.brand);
 
-// Trying to replace the entire object
 try {
     phone = {
         brand: "iPhone"
@@ -156,54 +148,34 @@ function Product(name) {
     this.name = name;
 }
 
-const product1 = new Product("Laptop");
+const shoe = new Product("Shoe");
 
-console.log(product1.constructor === Product);
-
-console.log(product1.constructor === Object);
-
-console.log(product1.constructor === String);
+console.log(shoe.constructor === Product);   // true
+console.log({}.constructor === Object);      // true
+console.log("abc".constructor === String);   // true
+console.log([].constructor === Array);       // true
+console.log((5).constructor === Number);     // true
 
 
 // 10
 
-function Product(name, price) {
+  function Product(name, price) {
     this.name = name;
     this.price = price;
-
-    this.display = function() {
-        console.log(this.name + ": ₦" + this.price);
+    this.showPrice = function () {
+      return this.name + " costs ₦" + this.price;
     };
-}
+  }
+  const sneakers = new Product("Sneakers", 25000);
+  const backpack = new Product("Backpack", 18000);
+  const cap = new Product("Cap", 3000);
 
-// Creating three products
-const smartphone = new Product("Smartphone", 150000);
+  sneakers.inStock = 10;     
+  cap.price = 3500;         
+  backpack.discount = 15;    
+  delete backpack.discount;  
 
-const backpack = new Product("Backpack", 20000);
-
-const cap = new Product("Cap", 5000);
-
-// Changing cap price
-cap.price = 3000;
-
-// Adding a discount property
-backpack.discount = "5%";
-
-console.log("Products:");
-
-smartphone.display();
-backpack.display();
-cap.display();
-
-// Deleting the discount property
-delete backpack.discount;
-
-console.log("After deleting discount:");
-
-console.log(backpack);
-
-// Checking the constructor
-console.log(smartphone.constructor === Product);
-console.log(backpack.constructor === Product);
-console.log(cap.constructor === Product);
-
+  console.log(sneakers.inStock);
+  console.log(cap.showPrice());
+  console.log(backpack.discount);
+  console.log(backpack.constructor === Product);
